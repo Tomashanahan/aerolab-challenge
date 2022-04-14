@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --primary: #FB7B04;
 }
 
@@ -15,13 +15,13 @@ body {
   text-align: center;
   background-color: white;
   min-height: 100vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: #333;
-}
+  justify-content: center; */
+  /* color: #333;
+} */
 
-* {
-  box-sizing: border-box;
-}
+/* * { */
+  /* box-sizing: border-box; */
+/* } */ 
