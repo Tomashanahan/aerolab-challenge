@@ -6,6 +6,7 @@ import Header from "~/Components/Header/Header";
 import Products from "~/Components/Products/Products";
 import FilterBar from "~/Components/FilterBar/FilterBar";
 import ProductsRedeemed from "~/Components/ProductsRedeemed/ProductsRedeemed";
+import {Banner} from "~/Components/Banner/Banner";
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,8 @@ const App: React.FC = () => {
         <Route
           element={
             <>
-              <Header />
+              <Header redeem={false} />
+              <Banner />
               <FilterBar />
               <Products />
             </>
@@ -24,7 +26,7 @@ const App: React.FC = () => {
         <Route
           element={
             <>
-              <Header />
+              <Header redeem={true} />
               <FilterBar />
               <ProductsRedeemed />
             </>
@@ -32,9 +34,6 @@ const App: React.FC = () => {
           path="/redeems"
         />
       </Routes>
-      {/* <Header />
-      <FilterBar />
-      <Products /> */}
     </Box>
   );
 };

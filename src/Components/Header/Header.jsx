@@ -8,7 +8,7 @@ import banner from "../../assets/banner.png";
 import {UserContext} from "../../Context/UserContext/UserContext";
 import Points from "../Points/Points";
 
-function Header() {
+function Header({redeem}) {
   const {user, getUser, dispatch} = useContext(UserContext);
 
   useEffect(() => {
@@ -35,9 +35,11 @@ function Header() {
           </Flex>
         </Flex>
       </Flex>
-      <Box>
-        <img alt="Banner" src={banner} />
-      </Box>
+      {redeem && (
+        <Text fontSize="4xl" fontWeight="extrabold" textAlign="center">
+          History Redeems
+        </Text>
+      )}
     </Box>
   );
 }

@@ -5,7 +5,9 @@ import {ProductsContext} from "~/Context/ProductsContext/ProductsContext";
 import {UserContext} from "~/Context/UserContext/UserContext";
 
 export function FilterProducts() {
-  const {products, lowestPrice, highestPrice, totalPerPage} = useContext(ProductsContext);
+  const {products, lowestPrice, highestPrice, totalPerPage, setInicio, setFin} = useContext(
+    ProductsContext,
+  );
   const {redeemLowestPrice, redeemHighestPrice, mostRecentsRedeems} = useContext(UserContext);
   const [selectedButton, setSelectedButton] = useState({});
 
@@ -19,12 +21,17 @@ export function FilterProducts() {
           Sort by:
         </Text>
         <Button
-          bg="#EDEDED"
+          _focus={{outline: "none"}}
+          _hover={{bg: selectedButton?.$mostRecent ? "#1AC9F6" : "#EDEDED"}}
+          bg={selectedButton?.$mostRecent ? "#1AC9F6" : "#EDEDED"}
           borderRadius="20px"
-          color="#575758"
+          color={selectedButton?.$mostRecent ? "#FFFF" : "#575758"}
           mx="10px"
           onClick={() => {
+            setInicio(0);
+            setFin(16);
             mostRecentsRedeems();
+            setSelectedButton({$mostRecent: true});
           }}
         >
           Most recent
@@ -37,6 +44,8 @@ export function FilterProducts() {
           color={selectedButton?.$lowestPrice ? "#FFFF" : "#575758"}
           mx="10px"
           onClick={() => {
+            setInicio(0);
+            setFin(16);
             lowestPrice();
             redeemLowestPrice();
             setSelectedButton({$lowestPrice: true});
@@ -52,6 +61,8 @@ export function FilterProducts() {
           color={selectedButton?.$highestPrice ? "#FFFF" : "#575758"}
           mx="10px"
           onClick={() => {
+            setInicio(0);
+            setFin(16);
             highestPrice();
             redeemHighestPrice();
             setSelectedButton({$highestPrice: true});
