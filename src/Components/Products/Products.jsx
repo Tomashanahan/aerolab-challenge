@@ -1,19 +1,30 @@
-import React from 'react'
-import useFetch from '../../Hooks/UseFetch'
-import { Box, SimpleGrid, Text } from '@chakra-ui/react';
-import Product from './Product';
+import React, {useContext, useEffect} from "react";
+import {SimpleGrid} from "@chakra-ui/react";
+
+import Product from "../Product/Product";
+import {ProductsContext} from "~/Context/ProductsContext/ProductsContext";
 
 function Products() {
-  const info = useFetch('https://private-amnesiac-7ca9fb-aerolabchallenge.apiary-proxy.com/products')
-  console.log(info);
-  let first_9 = info.slice(0,16)
+  const {products, getProducts, dispatch, inicio, fin, setTotalPerPage} = useContext(
+    ProductsContext,
+  );
+
+  useEffect(() => {
+    setTotalPerPage(products?.slice(inicio, fin).length);
+  }, [inicio, fin, setTotalPerPage, products]);
+
+  useEffect(() => {
+    dispatch(getProducts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <SimpleGrid columns={4} maxW='80%' m='auto' alignContent={'space-around'} gap={4} pb={14}>
-          {first_9?.map(elem => {
-            return <Product key={elem._id} {...elem}/>
-          })}
+    <SimpleGrid alignContent={"space-around"} columns={4} gap={4} m="auto" maxW="80%" pb={14}>
+      {products?.slice(inicio, fin).map((elem) => {
+        return <Product key={elem._id} {...elem} />;
+      })}
     </SimpleGrid>
-  )
+  );
 }
 
-export default Products
+export default Products;
