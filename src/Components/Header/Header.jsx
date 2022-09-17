@@ -32,27 +32,11 @@ function Header() {
 
           <Flex align="center" bg="#EEEFEF" borderRadius={"2xl"} justify="space-between" p={2}>
             <Points img={coin} points={user.points} />
-            {/* <Box color={"#727272"} ml={2}>
-              {user.points}
-            </Box>
-            <Box ml={2} mt={"3px"}>
-              <img alt="Coin" src={coin} width={"25px"} />
-            </Box> */}
           </Flex>
         </Flex>
       </Flex>
       <Box>
         <img alt="Banner" src={banner} />
-        {/* <Text
-        position={'relative'}
-        top={'-180px'}
-        left='-650px'
-        color={'#FBFEFF'}
-        fontSize='6xl'
-        fontWeight={'bold'}
-        >
-          Electronics
-        </Text> */}
       </Box>
     </Box>
   );
