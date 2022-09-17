@@ -13,6 +13,7 @@ const actionTypes = {
   REDEEM_LOWEST_PRICE: "REDEEM_LOWEST_PRICE",
   REDEEM_HIGHEST_PRICE: "REDEEM_HIGHEST_PRICE",
   MOST_RECENTS_REDEEMS: "MOST_RECENTS_REDEEMS",
+  ADD_POINTS: "ADD_POINTS",
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -36,6 +37,10 @@ const reducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         redeemHistory: state.redeemHistory.sort((a, b) => b.cost - a.cost),
+      };
+    case actionTypes.ADD_POINTS:
+      return {
+        ...state,
       };
     case actionTypes.MOST_RECENTS_REDEEMS:
       return {
@@ -103,6 +108,30 @@ export function UserProvider({children}) {
     return dispatch({type: actionTypes.MOST_RECENTS_REDEEMS});
   };
 
+  const addingUserPoints = async (points) => {
+    try {
+      const addingPoints = await fetch("https://coding-challenge-api.aerolab.co/user/points", {
+        method: "POST",
+        body: JSON.stringify({
+          amount: points,
+        }),
+        headers: new Headers({
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4NDA0YjRkYzhhODAwMWE4N2E1YTgiLCJpYXQiOjE2NDk5NTA3OTV9.EZqjg65FEIKnsRah2WhNJ1vNHKrvO3a8puXb4O3K8h0",
+        }),
+      });
+      const userPoints = await addingPoints.json();
+
+      await getUser();
+
+      return dispatch({type: actionTypes.ADD_POINTS, payload: userPoints});
+    } catch (error) {
+      console.log(error, " soy el error del addingPionts");
+    }
+  };
+
   const value = {
     user,
     getUser,
@@ -112,6 +141,7 @@ export function UserProvider({children}) {
     redeemLowestPrice,
     redeemHighestPrice,
     mostRecentsRedeems,
+    addingUserPoints,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

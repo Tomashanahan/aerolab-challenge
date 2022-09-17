@@ -6,6 +6,7 @@ import logo from "../../assets/logo.svg";
 import coin from "../../assets/icons/coin.svg";
 import banner from "../../assets/banner.png";
 import {UserContext} from "../../Context/UserContext/UserContext";
+import Points from "../Points/Points";
 
 function Header() {
   const {user, getUser, dispatch} = useContext(UserContext);
@@ -30,12 +31,13 @@ function Header() {
           </Link>
 
           <Flex align="center" bg="#EEEFEF" borderRadius={"2xl"} justify="space-between" p={2}>
-            <Box color={"#727272"} ml={2}>
+            <Points img={coin} points={user.points} />
+            {/* <Box color={"#727272"} ml={2}>
               {user.points}
             </Box>
             <Box ml={2} mt={"3px"}>
               <img alt="Coin" src={coin} width={"25px"} />
-            </Box>
+            </Box> */}
           </Flex>
         </Flex>
       </Flex>
