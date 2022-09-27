@@ -2,19 +2,33 @@ import React, {useContext, useState} from "react";
 import {Box, Button, Text} from "@chakra-ui/react";
 
 import {UserContext} from "~/Context/UserContext/UserContext";
+import Loading from "../Loading/Loading";
 
-function Points({img, points}) {
-  const {addingUserPoints} = useContext(UserContext);
+function Points({img}) {
+  const {addingUserPoints, addingPointsLoading, user} = useContext(UserContext);
   const [addPoints, setAddPoints] = useState(false);
 
   return (
     <>
-      <Text color={"#727272"} cursor="pointer" ml={2} onClick={() => setAddPoints(!addPoints)}>
-        {points}
-      </Text>
-      <Box ml={2} mt={"3px"}>
-        <img alt="Coin" src={img} width={"25px"} />
-      </Box>
+      {addingPointsLoading ? (
+        <>
+          <Box m="auto" mb={1} w="50%">
+            <Loading />
+          </Box>
+          <Box ml={2} mt={"3px"}>
+            <img alt="Coin" src={img} width={"25px"} />
+          </Box>
+        </>
+      ) : (
+        <>
+          <Text color={"#727272"} cursor="pointer" ml={2} onClick={() => setAddPoints(!addPoints)}>
+            {user.points}
+          </Text>
+          <Box ml={2} mt={"3px"}>
+            <img alt="Coin" src={img} width={"25px"} />
+          </Box>
+        </>
+      )}
       {addPoints && (
         <Box
           bg="#FFFF"

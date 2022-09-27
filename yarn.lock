@@ -2501,6 +2501,11 @@
     "use-callback-ref" "^1.2.5"
     "use-sidecar" "^1.0.5"
 
+"react-icons@^4.4.0":
+  "integrity" "sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
+  "version" "4.4.0"
+
 "react-is@^16.7.0", "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -2553,7 +2558,7 @@
     "invariant" "^2.2.4"
     "tslib" "^1.0.0"
 
-"react@^15.3.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>=16.8", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=16.8.6", "react@17.0.2":
+"react@*", "react@^15.3.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2", "react@>=16.8", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=16.8.6", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -2839,6 +2844,11 @@
   "version" "7.2.0"
   dependencies:
     "has-flag" "^4.0.0"
+
+"sweetalert2@^11.4.34":
+  "integrity" "sha512-R9u4mE4zYBoJbwFypeioyE+NKhZYk+6DzHTGA8J21naQOkqeWEGWVT+OFEg/kS1/MMogj92x/1pCsx92I2VTbA=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.4.34.tgz"
+  "version" "11.4.34"
 
 "table@^6.0.4":
   "integrity" "sha512-rxZevLGTUzWna/qBLObOe16kB2RTnnbhciwgPbMMlazz1yZGVEgnZK762xyVdVznhqxrfCeBMmMkgOOaPwjH7g=="

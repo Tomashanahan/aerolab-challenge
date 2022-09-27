@@ -1,17 +1,18 @@
-import React, {useContext} from "react";
+/* eslint-disable no-prototype-builtins */
 import {SimpleGrid} from "@chakra-ui/react";
+import React, {useContext} from "react";
 
 import {UserContext} from "~/Context/UserContext/UserContext";
 import Product from "../Product/Product";
 
 function ProductsRedeemed() {
-  const {redeemHistory, user} = useContext(UserContext);
+  const {redeemHistory} = useContext(UserContext);
 
   return (
     <div>
       <SimpleGrid alignContent={"space-around"} columns={4} gap={4} m="auto" maxW="80%" pb={14}>
         {redeemHistory?.map((elem, i) => {
-          return <Product key={i} {...elem} />;
+          return <Product key={i} {...elem} redeeme={true} />;
         })}
       </SimpleGrid>
     </div>

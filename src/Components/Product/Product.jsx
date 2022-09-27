@@ -1,18 +1,19 @@
 import React, {useContext, useState} from "react";
 import {Flex, Box, Image, Text, Button} from "@chakra-ui/react";
+import Swal from "sweetalert2";
 
 import buy_Blue from "../../assets/icons/buy-blue.svg";
 import buy_white from "../../assets/icons/buy-white.svg";
 import coin from "../../assets/icons/coin.svg";
 import {UserContext} from "~/Context/UserContext/UserContext";
 
-function Product({_id, img, name, cost, category}) {
+function Product({_id, img, name, cost, category, redeeme, quantity}) {
   const {user, dispatch, redeem} = useContext(UserContext);
   const [hover, setHover] = useState(false);
 
   return (
     <Box mt="30px" position="relative">
-      {hover && (
+      {hover && !redeeme && (
         <Flex alignItems="center" justifyContent="center" position="absolute" w="full" zIndex={100}>
           <Flex
             bg="rgb(55, 216, 252, 0.8)"
@@ -47,7 +48,16 @@ function Product({_id, img, name, cost, category}) {
                   disabled={user.points > cost ? false : true}
                   mt={3}
                   px={14}
-                  onClick={() => dispatch(redeem(_id))}
+                  onClick={() => {
+                    dispatch(redeem(_id));
+                    Swal.fire({
+                      position: "top",
+                      icon: "success",
+                      title: "Redeem successful",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  }}
                 >
                   Redeem now
                 </Button>
@@ -70,9 +80,26 @@ function Product({_id, img, name, cost, category}) {
         >
           <Box pos="relative">
             {user.points > cost ? (
-              <Box left="80%" position="absolute" top="15px">
-                <Image src={buy_Blue} />
-              </Box>
+              redeeme ? (
+                <Box left="70%" position="absolute" top="10px">
+                  <Text
+                    bg="rgb(128, 128, 128, 0.9)"
+                    borderRadius="20px"
+                    color="#FFFF"
+                    m="auto"
+                    mt="10px"
+                    p="10px"
+                    textAlign="center"
+                    w="-moz-fit-content"
+                  >
+                    {quantity > 1 ? `${quantity} Units` : `${quantity} Unit`}
+                  </Text>
+                </Box>
+              ) : (
+                <Box left="80%" position="absolute" top="15px">
+                  <Image src={buy_Blue} />
+                </Box>
+              )
             ) : (
               <Box
                 display={hover ? "none" : "inline-block"}
@@ -97,15 +124,15 @@ function Product({_id, img, name, cost, category}) {
               src={img.url}
             />
           </Box>
-          <Box p="20px" textAlign={"left"}>
+          <Box p={redeem && quantity ? "10px 20px" : "20px"} textAlign={"left"}>
             <Text color="#CCCCCC" mt={"-5px"} textTransform={"capitalize"}>
               {category}
             </Text>
-            <Flex alignContent="center" justifyContent="space-between" mt="1">
+            <Box>
               <Text isTruncated color="#727272" lineHeight="tight" textTransform={"capitalize"}>
                 {name}
               </Text>
-            </Flex>
+            </Box>
           </Box>
         </Flex>
       </Flex>

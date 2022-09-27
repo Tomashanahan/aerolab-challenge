@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-prototype-builtins */
 import React, {createContext, useReducer} from "react";
 
 export const UserContext = createContext();
@@ -5,6 +7,7 @@ export const UserContext = createContext();
 const initialState = {
   user: {},
   redeemHistory: [],
+  addingPointsLoading: false,
 };
 
 const actionTypes = {
@@ -14,6 +17,21 @@ const actionTypes = {
   REDEEM_HIGHEST_PRICE: "REDEEM_HIGHEST_PRICE",
   MOST_RECENTS_REDEEMS: "MOST_RECENTS_REDEEMS",
   ADD_POINTS: "ADD_POINTS",
+  ADDING_POINTS_LOADING: "ADDING_POINTS_LOADING",
+};
+
+const getQuantity = (products) => {
+  const obj = {};
+
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].productId in obj) {
+      obj[products[i].productId].quantity += 1;
+    } else if (!obj.hasOwnProperty(products.productId)) {
+      obj[products[i].productId] = {...products[i], quantity: 1};
+    }
+  }
+
+  return obj;
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -22,7 +40,7 @@ const reducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         user: payload,
-        redeemHistory: payload.redeemHistory,
+        redeemHistory: Object.values(getQuantity(payload.redeemHistory)),
       };
     case actionTypes.USER_REDEEM:
       return {
@@ -51,6 +69,11 @@ const reducer = (state = initialState, {type, payload}) => {
             Number(a.createDate.replace(/[^0-9]/gi, "")),
         ),
       };
+    case actionTypes.ADDING_POINTS_LOADING:
+      return {
+        ...state,
+        addingPointsLoading: payload,
+      };
     default:
       return state;
   }
@@ -58,7 +81,7 @@ const reducer = (state = initialState, {type, payload}) => {
 
 export function UserProvider({children}) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {user, redeemHistory} = state;
+  const {user, redeemHistory, addingPointsLoading} = state;
 
   const getUser = async () => {
     const user = await fetch("https://coding-challenge-api.aerolab.co/user/me", {
@@ -110,6 +133,7 @@ export function UserProvider({children}) {
 
   const addingUserPoints = async (points) => {
     try {
+      dispatch({type: actionTypes.ADDING_POINTS_LOADING, payload: true});
       const addingPoints = await fetch("https://coding-challenge-api.aerolab.co/user/points", {
         method: "POST",
         body: JSON.stringify({
@@ -125,6 +149,7 @@ export function UserProvider({children}) {
       const userPoints = await addingPoints.json();
 
       await getUser();
+      dispatch({type: actionTypes.ADDING_POINTS_LOADING, payload: false});
 
       return dispatch({type: actionTypes.ADD_POINTS, payload: userPoints});
     } catch (error) {
@@ -142,6 +167,7 @@ export function UserProvider({children}) {
     redeemHighestPrice,
     mostRecentsRedeems,
     addingUserPoints,
+    addingPointsLoading,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
