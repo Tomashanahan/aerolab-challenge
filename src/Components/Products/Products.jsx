@@ -19,7 +19,14 @@ function Products() {
   }, []);
 
   return (
-    <SimpleGrid alignContent={"space-around"} columns={4} gap={4} m="auto" maxW="80%" pb={14}>
+    <SimpleGrid
+      alignContent={"space-around"}
+      columns={[1, 1, 1, 2, 3, 4]}
+      gap={4}
+      m="auto"
+      maxW="80%"
+      pb={14}
+    >
       {products?.slice(inicio, fin).map((elem) => {
         return <Product key={elem._id} redeeme={false} {...elem} />;
       })}

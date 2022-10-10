@@ -10,7 +10,14 @@ function ProductsRedeemed() {
 
   return (
     <div>
-      <SimpleGrid alignContent={"space-around"} columns={4} gap={4} m="auto" maxW="80%" pb={14}>
+      <SimpleGrid
+        alignContent={"space-around"}
+        columns={[1, 1, 1, 2, 3, 4]}
+        gap={4}
+        m="auto"
+        maxW="80%"
+        pb={14}
+      >
         {redeemHistory?.map((elem, i) => {
           return <Product key={i} {...elem} redeeme={true} />;
         })}

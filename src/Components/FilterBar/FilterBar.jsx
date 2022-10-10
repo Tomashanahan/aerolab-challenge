@@ -29,14 +29,15 @@ function FilterBar() {
       align="center"
       borderBottom="1.5px solid #DBDADC"
       color="#DBDBDB"
+      flexDir={["column", "column", "column", "row", "row", "row"]}
       justify="space-between"
       m="auto"
       mt="30px"
       pb="20px"
-      w="80%"
+      w={["100%", "100%", "100%", "80%", "85%", "80%"]}
     >
       <FilterProducts />
-      <Flex align="center" w="10%">
+      <Flex align="center" justify="center" mt="10px" w="10%">
         <Button
           borderRadius="full"
           color="#DBDBDB"

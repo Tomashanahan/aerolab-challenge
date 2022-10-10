@@ -34,7 +34,7 @@ function Points({img}) {
           bg="#FFFF"
           borderRadius="20px"
           boxShadow="-10px 0px 13px -7px rgba(142,142,142,0.6), 10px 0px 13px -7px rgba(142,142,142,0.6), 2px 2px 12px 5px rgba(142,142,142,0.6)"
-          left="75%"
+          left={["10%", "10%", "15%", "54%", "65%", "75%"]}
           p="15px"
           pos="absolute"
           textAlign="center"
